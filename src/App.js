@@ -23,7 +23,12 @@ class App extends Component {
       }
     } catch (error) {}
   }
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      console.log("contacts have been updated");
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
 
   addContact = (name, number) => {
     const sameContact = this.state.contacts.find(
